@@ -1,4 +1,3 @@
-
 print("""
 BIENVENIDO AL REGISTRO DE BEBES RECIEN NACIDOS
 
@@ -23,38 +22,39 @@ nombre_medico = ""
 hora = ""
 
 def consultar():
-    return hospital
-
+    global hospital  # Permite modificar la variable global
+    
     print("""
     Indique que hospital quieres consultar:
 
-    1. "...."
-    2. "...."
-    3. "...."
-    4. "...."
+    1. Hospital Central
+    2. Hospital Materno Infantil
+    3. Sanatorio San Martin
+    4. Clinica del Sol
     """)
 
     selecciona = input("Elige tu hospital: ")
 
     if selecciona == "1":
-        hospital = "...."
+        hospital = "Hospital Central"
     elif selecciona == "2":
-        hospital = "...."
+        hospital = "Hospital Materno Infantil"
     elif selecciona == "3":
-        hospital = "...."
+        hospital = "Sanatorio San Martin"
     elif selecciona == "4":
-        hospital = "...."
+        hospital = "Clinica del Sol"
     else:
         print("Opcion incorrecta")
+        return
 
-    if hospital = "":
+    if hospital != "":
         print("Ingresaste al " + hospital)
 
 
 def registrar():
-    return nombre, apellido, fecha, peso, altura, nombre_madre, nombre_padre, nombre_medico, hora
+    global nombre, apellido, fecha, peso, altura, nombre_madre, nombre_padre, nombre_medico, hora
 
-    print("REGISTRO DEL BEBE")
+    print("\nREGISTRO DEL BEBE")
 
     nombre = input("Ingrese el nombre del bebe: ")
     apellido = input("Ingrese el apellido del bebe: ")
@@ -64,7 +64,7 @@ def registrar():
     nombre_madre = input("Ingrese el nombre de la madre: ")
     nombre_padre = input("Ingrese el nombre del padre: ")
     nombre_medico = input("Ingrese el nombre del medico: ")
-    fecha = input("Ingrese la hora de nacimiento: ")
+    hora = input("Ingrese la hora de nacimiento: ")
 
     print("Bebe registrado correctamente")
 
@@ -73,21 +73,28 @@ def guardar():
     if nombre == "":
         print("Primero debes registrar un bebe")
     else:
-        print("""
-        INFORMACION GUARDADA
+        datos_registro = f"""----------------------------------------
+INFORMACION GUARDADA
+Hospital: {hospital}
+Nombre: {nombre}
+Apellido: {apellido}
+Fecha de nacimiento: {fecha}
+Peso: {peso}
+Altura: {altura}
+Nombre de la madre: {nombre_madre}
+Nombre del padre: {nombre_padre}
+Nombre del medico: {nombre_medico}
+Hora de nacimiento: {hora}
+----------------------------------------\n"""
 
-        Hospital: """ + hospital + """
-        Nombre: """ + nombre + """
-        Apellido: """ + apellido + """
-        Fecha de nacimiento: """ + fecha + """
-        Peso: """ + peso + """
-        Altura: """ + altura + """
-        Nombre de la madre: """ + nombre_madre + """
-        Nombre del padre: """ + nombre_padre + """
-        Nombre del medico: """ + nombre_medico + """
-        hora de nacimiento: """ + hora + """)
+        # Muestra en pantalla
+        print(datos_registro)
 
-        print("Informacion guardada correctamente")
+        # Guarda en archivo de texto automáticamente
+        with open("registros_bebes.txt", "a", encoding="utf-8") as archivo:
+            archivo.write(datos_registro)
+
+        print("¡Informacion guardada correctamente en el archivo 'registros_bebes.txt'!")
 
 
 while continuar == "si":
